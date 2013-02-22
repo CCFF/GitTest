@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 // Projectnaam
 [assembly: AssemblyTitle("GitTestApp")] 
-[assembly: AssemblyProduct("GitTestApp ( master)")]
+[assembly: AssemblyProduct("GitTestApp ($BRANCH$)")]
 
 [assembly: ComVisible(false)]
 
@@ -16,14 +16,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Lucrasoft")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("2013.8.4.1")]
-[assembly: AssemblyFileVersion("2013.8.4.1")]
-[assembly: AssemblyInformationalVersion("Changeset 4 (741dccf)")]
+[assembly: AssemblyVersion("$YEAR$.$WEEK$.$REVISION$.$LOCAL_MODIFICATIONS$")]
+[assembly: AssemblyFileVersion("$YEAR$.$WEEK$.$REVISION$.$LOCAL_MODIFICATIONS$")]
+[assembly: AssemblyInformationalVersion("Changeset $REVISION$ ($SHORT_CHANGESET$)")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
-[assembly: AssemblyCopyright("Copyright Lucrasoft Solutions © DEBUG 2013")]
+[assembly: AssemblyCopyright("Copyright Lucrasoft Solutions © DEBUG $YEAR$")]
 #else
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyCopyright("Copyright Lucrasoft Solutions © 2013")]
+[assembly: AssemblyCopyright("Copyright Lucrasoft Solutions © $YEAR$")]
 #endif
