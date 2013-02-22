@@ -22,7 +22,7 @@
 
             var projectDir = WScript.Arguments.Item(0);
 
-            var gitRevNum = shell.Exec("git rev-list --all --count");
+            var gitRevNum = shell.Exec("git rev-list HEAD --count");
             var rev = gitRevNum.StdOut.ReadAll();
             var git_revision = String(rev).replace(/\n/g, "");
            
