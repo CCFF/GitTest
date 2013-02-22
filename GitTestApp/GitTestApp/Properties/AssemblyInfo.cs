@@ -16,9 +16,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Lucrasoft")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("2013.8.4.1")]
-[assembly: AssemblyFileVersion("2013.8.4.1")]
-[assembly: AssemblyInformationalVersion("Changeset 4 (741dccf)")]
+[assembly: AssemblyVersion("2013.8.5.0")]
+[assembly: AssemblyFileVersion("2013.8.5.0")]
+[assembly: AssemblyInformationalVersion("Changeset 5 (499e93c)")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

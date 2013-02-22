@@ -89,6 +89,7 @@ csx
 AppPackages/
 
 # Others
+*.AssemblyInfo.cs
 [Bb]in
 [Oo]bj
 sql
