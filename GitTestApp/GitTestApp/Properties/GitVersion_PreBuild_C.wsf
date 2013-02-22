@@ -29,7 +29,9 @@
 			var git_local_modifications = '0';
 			var gitStatus = shell.Exec("git status --porcelain --untracked-files=no");
 			var changes = gitStatus.StdOut.ReadAll();
-            if (String(changes).replace(/\n/g, "").length > 0) {
+			var gitRemoteStatus = shell.Exec("git branch -r --contains");
+			var remoteBranch = gitRemoteStatus.StdOut.ReadAll();
+            if (String(changes).replace(/\n/g, "").length > 0 || String(remoteBranch).replace(/\n/g, "").length == 0 ) {
                 git_local_modifications = "1";
             }
 
