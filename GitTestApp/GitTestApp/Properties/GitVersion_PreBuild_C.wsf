@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/WindowsScriptHost">
+    <job>
+        <script language="JScript">
+			Date.prototype.getWeek = function () {
+                var determinedate = new Date();
+                determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
+                var D = determinedate.getDay();
+                if (D == 0) D = 7;
+                determinedate.setDate(determinedate.getDate() + (4 - D));
+                var YN = determinedate.getFullYear();
+                var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
+                var WN = 1 + Math.floor(ZBDoCY / 7);
+                return WN;
+            }
+			
+            var fso = new ActiveXObject("Scripting.FileSystemObject");
+            var shell = new ActiveXObject("WScript.Shell");
+            var ForReading = 1;
+            var ForWriting = 2;
+            var ForAppending = 8;
+
+            var projectDir = WScript.Arguments.Item(0);
+
+            var gitRevNum = shell.Exec("git rev-list --all --count");
+            var rev = gitRevNum.StdOut.ReadAll();
+            var git_revision = String(rev).replace(/\n/g, "");
+           
+			var git_local_modifications = '0';
+			var gitStatus = shell.Exec("git status --porcelain --untracked-files=no");
+			var changes = gitStatus.StdOut.ReadAll();
+            if (String(changes).replace(/\n/g, "").length > 0) {
+                git_local_modifications = "1";
+            }
+
+            var gitChangeset = shell.Exec("git rev-parse HEAD");
+            var changeset = gitChangeset.StdOut.ReadAll();
+            var git_changeset = String(changeset).replace(/\n/g, "");
+
+            var gitChangesetShort = shell.Exec("git rev-parse --short HEAD");
+            var changeset_short = gitChangesetShort.StdOut.ReadAll();
+            var git_changeset_short = String(changeset_short).replace(/\n/g, "");
+
+			var git_branch = "";
+            var gitBranch = shell.Exec("git branch");
+            var branch = gitBranch.StdOut.ReadAll();			
+            var gitbranches = String(branch).split("\n");
+			for ( var i in gitbranches){
+				if(gitbranches[i].indexOf('*') !== -1){
+					git_branch += gitbranches[i].replace('*',"");
+				}
+			}
+			
+            var tmplFile = fso.OpenTextFile(projectDir + 'Properties/AssemblyInfo.cs.tmpl', ForReading, false, 0);
+            var strContents = tmplFile.ReadAll();
+            tmplFile.Close();
+
+			var CurrentDate = new Date();
+			
+			strContents = String(strContents).replace(/\$YEAR\$/g, CurrentDate.getFullYear());
+            strContents = String(strContents).replace(/\$WEEK\$/g, CurrentDate.getWeek());
+            strContents = String(strContents).replace(/\$REVISION\$/g, git_revision);
+            strContents = String(strContents).replace(/\$LOCAL_MODIFICATIONS\$/g, git_local_modifications);
+            strContents = String(strContents).replace(/\$CHANGESET\$/g, git_changeset);
+            strContents = String(strContents).replace(/\$SHORT_CHANGESET\$/g, git_changeset_short);
+            strContents = String(strContents).replace(/\$BRANCH\$/g, git_branch	);
+
+            var asmFile = fso.CreateTextFile(projectDir + 'Properties/AssemblyInfo.cs', true);
+            asmFile.Write(strContents);
+            asmFile.Close();
+        </script>
+    </job>
+</package>

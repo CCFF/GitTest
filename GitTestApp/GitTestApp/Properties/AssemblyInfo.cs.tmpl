@@ -1,0 +1,29 @@
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+// Projectnaam
+[assembly: AssemblyTitle("GitTestApp")] 
+[assembly: AssemblyProduct("GitTestApp ($BRANCH$)")]
+
+[assembly: ComVisible(false)]
+
+// Gebruik dit om je assembly COM visible te maken
+// [assembly: ComVisible(true)]
+// [assembly: Guid("")]
+
+// Niet meer wijzigen vanaf hier!
+[assembly: AssemblyCompany("Lucrasoft")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: AssemblyVersion("$YEAR$.$WEEK$.$REVISION$.$LOCAL_MODIFICATIONS$")]
+[assembly: AssemblyFileVersion("$YEAR$.$WEEK$.$REVISION$.$LOCAL_MODIFICATIONS$")]
+[assembly: AssemblyInformationalVersion("Changeset $REVISION$ ($SHORT_CHANGESET$)")]
+
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+[assembly: AssemblyCopyright("Copyright Lucrasoft Solutions © DEBUG $YEAR$")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyCopyright("Copyright Lucrasoft Solutions © $YEAR$")]
+#endif
